@@ -1,0 +1,989 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Portfolio website for Vibhor Yadav, Computer Science student and developer."
+  />
+  <title>Vibhor Yadav // Developer Portfolio</title>
+
+  <style>
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --lime: #00ff66;
+      --yellow: #ffe600;
+      --grey: #f0f0f0;
+      --dark-grey: #666666;
+      --border: 4px solid var(--black);
+      --shadow: 7px 7px 0 var(--black);
+      --shadow-small: 4px 4px 0 var(--black);
+      --radius: 0;
+      --max-width: 1240px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::selection {
+      background: var(--black);
+      color: var(--lime);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max-width));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+      border-bottom: var(--border);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 78px;
+    }
+
+    .logo {
+      display: inline-block;
+      padding: 0.45rem 0.7rem;
+      background: var(--black);
+      color: var(--lime);
+      border: 3px solid var(--black);
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      font-weight: 900;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      transform: rotate(-2deg);
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a::after {
+      position: absolute;
+      right: 0;
+      bottom: -0.35rem;
+      left: 0;
+      height: 3px;
+      background: var(--lime);
+      content: "";
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 150ms ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0.75rem 1rem;
+      border: var(--border);
+      background: var(--lime);
+      box-shadow: var(--shadow-small);
+      color: var(--black);
+      cursor: pointer;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-align: center;
+      text-transform: uppercase;
+      transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        background 120ms ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      background: var(--yellow);
+      box-shadow: 1px 1px 0 var(--black);
+      transform: translate(3px, 3px);
+    }
+
+    .button:active {
+      box-shadow: none;
+      transform: translate(5px, 5px);
+    }
+
+    .button--black {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .button--black:hover,
+    .button--black:focus-visible {
+      background: var(--lime);
+      color: var(--black);
+    }
+
+    .button--white {
+      background: var(--white);
+    }
+
+    .hero {
+      display: grid;
+      align-items: center;
+      min-height: calc(100vh - 78px);
+      padding: 4rem 0 5rem;
+      border-bottom: var(--border);
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.045) 1px, transparent 1px),
+        linear-gradient(rgba(0, 0, 0, 0.045) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 3rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 1.5rem;
+      padding: 0.45rem 0.75rem;
+      border: 3px solid var(--black);
+      background: var(--yellow);
+      box-shadow: var(--shadow-small);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 980px;
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(3rem, 12vw, 9.5rem);
+      font-weight: 900;
+      letter-spacing: -0.1em;
+      line-height: 0.82;
+      text-transform: uppercase;
+    }
+
+    .hero h1 .accent {
+      display: block;
+      color: var(--lime);
+      text-shadow:
+        4px 4px 0 var(--black),
+        -2px -2px 0 var(--black),
+        2px -2px 0 var(--black),
+        -2px 2px 0 var(--black);
+    }
+
+    .hero-copy {
+      max-width: 700px;
+      margin-top: 2rem;
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      font-weight: 700;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .hero-sticker {
+      display: grid;
+      place-items: center;
+      width: min(100%, 290px);
+      min-height: 290px;
+      margin-inline: auto;
+      border: var(--border);
+      background: var(--lime);
+      box-shadow: 11px 11px 0 var(--black);
+      transform: rotate(3deg);
+    }
+
+    .hero-sticker-inner {
+      padding: 1rem;
+      border: 3px dashed var(--black);
+      text-align: center;
+      transform: rotate(-3deg);
+    }
+
+    .hero-sticker strong {
+      display: block;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 4.5rem;
+      font-weight: 900;
+      letter-spacing: -0.15em;
+      line-height: 0.8;
+    }
+
+    .hero-sticker span {
+      display: block;
+      margin-top: 1.25rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.9rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 5rem 0;
+      border-bottom: var(--border);
+    }
+
+    .section--grey {
+      background: var(--grey);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-label {
+      margin-bottom: 0.5rem;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.09em;
+      line-height: 0.9;
+      text-transform: uppercase;
+    }
+
+    .section-number {
+      display: none;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 0.8;
+    }
+
+    .about-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .about-copy {
+      border: var(--border);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+    }
+
+    .about-copy p + p {
+      margin-top: 1rem;
+    }
+
+    .about-copy p {
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .about-copy strong {
+      background: var(--lime);
+      font-weight: 900;
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+
+    .stack-card {
+      display: flex;
+      align-items: center;
+      min-height: 76px;
+      padding: 0.8rem;
+      border: var(--border);
+      background: var(--white);
+      box-shadow: var(--shadow-small);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        background 120ms ease;
+    }
+
+    .stack-card:hover,
+    .stack-card:focus-within {
+      background: var(--lime);
+      box-shadow: 1px 1px 0 var(--black);
+      transform: translate(3px, 3px);
+    }
+
+    .projects-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      border: var(--border);
+      background: var(--white);
+      box-shadow: var(--shadow);
+      transition:
+        transform 120ms ease,
+        box-shadow 120ms ease;
+    }
+
+    .project-card:hover {
+      box-shadow: 2px 2px 0 var(--black);
+      transform: translate(5px, 5px);
+    }
+
+    .project-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border-bottom: var(--border);
+      background: var(--black);
+      color: var(--lime);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-number {
+      color: var(--white);
+    }
+
+    .project-content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 1.5rem;
+    }
+
+    .project-content h3 {
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      line-height: 0.95;
+      text-transform: uppercase;
+    }
+
+    .project-content p {
+      margin-top: 1rem;
+      color: #222;
+      font-weight: 600;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.25rem 0;
+    }
+
+    .tag {
+      padding: 0.35rem 0.5rem;
+      border: 2px solid var(--black);
+      background: var(--yellow);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.7rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+
+    .project-links .button {
+      flex: 1 1 140px;
+      min-height: 44px;
+      padding: 0.65rem;
+      font-size: 0.72rem;
+    }
+
+    .contact-layout {
+      display: grid;
+      gap: 2.5rem;
+    }
+
+    .contact-heading {
+      font-family: "Courier New", Courier, monospace;
+      font-size: clamp(3rem, 11vw, 8.5rem);
+      font-weight: 900;
+      letter-spacing: -0.12em;
+      line-height: 0.78;
+      text-transform: uppercase;
+    }
+
+    .contact-heading span {
+      display: block;
+      color: var(--lime);
+      text-shadow:
+        4px 4px 0 var(--black),
+        -2px -2px 0 var(--black),
+        2px -2px 0 var(--black),
+        -2px 2px 0 var(--black);
+    }
+
+    .contact-copy {
+      max-width: 560px;
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      padding: 1.25rem;
+      border: var(--border);
+      background: var(--grey);
+      box-shadow: var(--shadow);
+    }
+
+    .form-field {
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .form-field label {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 3px solid var(--black);
+      border-radius: 0;
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+      padding: 0.85rem;
+      font-weight: 700;
+    }
+
+    .form-field textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus {
+      background: var(--lime);
+      box-shadow: 5px 5px 0 var(--black);
+      transform: translate(-2px, -2px);
+    }
+
+    .social-links {
+      display: grid;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      border: var(--border);
+      background: var(--white);
+      box-shadow: var(--shadow-small);
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.82rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      transition:
+        transform 120ms ease,
+        box-shadow 120ms ease,
+        background 120ms ease;
+    }
+
+    .social-link:hover,
+    .social-link:focus-visible {
+      background: var(--yellow);
+      box-shadow: 1px 1px 0 var(--black);
+      transform: translate(3px, 3px);
+    }
+
+    .site-footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 2rem 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      color: var(--lime);
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    .footer-meta {
+      color: #cccccc;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    :focus-visible {
+      outline: 4px solid var(--yellow);
+      outline-offset: 4px;
+    }
+
+    @media (min-width: 700px) {
+      .container {
+        width: min(100% - 4rem, var(--max-width));
+      }
+
+      .nav-links {
+        display: flex;
+      }
+
+      .hero {
+        padding: 6rem 0;
+      }
+
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) 290px;
+        gap: 4rem;
+      }
+
+      .hero-sticker {
+        margin-inline: 0;
+      }
+
+      .section {
+        padding: 7rem 0;
+      }
+
+      .section-number {
+        display: block;
+      }
+
+      .about-grid {
+        grid-template-columns: 0.9fr 1.1fr;
+        align-items: start;
+      }
+
+      .stack-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr 0.8fr;
+        align-items: start;
+      }
+
+      .contact-form {
+        padding: 1.5rem;
+      }
+
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1050px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) 350px;
+      }
+
+      .hero-sticker {
+        width: 350px;
+        min-height: 350px;
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="logo" href="#top" aria-label="Vibhor Yadav home">VY//DEV</a>
+
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <a class="button" href="#contact">Let's Talk</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Available for interesting problems // 2025</p>
+
+          <h1 id="hero-title">
+            Vibhor
+            <span class="accent">Yadav</span>
+            <small>// Developer</small>
+          </h1>
+
+          <p class="hero-copy">
+            Computer Science student and developer building practical digital
+            experiences with clean logic, sharp interfaces, and unapologetic
+            curiosity.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button" href="#projects">View My Work</a>
+            <a class="button button--white" href="#about">Explore Stack</a>
+          </div>
+        </div>
+
+        <div class="hero-sticker" aria-label="Computer science and development badge">
+          <div class="hero-sticker-inner">
+            <strong>CS<br />+</strong>
+            <span>Build<br />Break<br />Repeat</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--grey" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">01 // Profile data</p>
+            <h2 class="section-title" id="about-title">About + Stack</h2>
+          </div>
+          <span class="section-number" aria-hidden="true">01</span>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-copy">
+            <p>
+              I am <strong>Vibhor Yadav</strong>, a Computer Science learner
+              focused on turning concepts into useful, memorable products.
+            </p>
+            <p>
+              My work sits at the intersection of frontend engineering,
+              problem-solving, and visual communication. I care about how
+              things work and how they feel.
+            </p>
+            <p>
+              Currently learning, shipping, experimenting, and looking for the
+              next challenge worth obsessing over.
+            </p>
+          </article>
+
+          <div class="stack-grid" aria-label="Technical skills">
+            <div class="stack-card">HTML5</div>
+            <div class="stack-card">CSS3</div>
+            <div class="stack-card">JavaScript</div>
+            <div class="stack-card">React</div>
+            <div class="stack-card">Python</div>
+            <div class="stack-card">C++</div>
+            <div class="stack-card">Git / GitHub</div>
+            <div class="stack-card">Responsive UI</div>
+            <div class="stack-card">Problem Solving</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">02 // Selected builds</p>
+            <h2 class="section-title" id="projects-title">Featured Projects</h2>
+          </div>
+          <span class="section-number" aria-hidden="true">02</span>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <div class="project-top">
+              <span>Featured build</span>
+              <span class="project-number">001</span>
+            </div>
+            <div class="project-content">
+              <h3>Study<br />Sprint</h3>
+              <p>
+                A focused productivity dashboard designed to help students
+                organize tasks, track sessions, and stay accountable.
+              </p>
+              <div class="tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a class="button button--black" href="#" aria-label="View Study Sprint code">
+                  View Code
+                </a>
+                <a class="button" href="#" aria-label="View Study Sprint live demo">
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span>Interface experiment</span>
+              <span class="project-number">002</span>
+            </div>
+            <div class="project-content">
+              <h3>Dev<br />Notes</h3>
+              <p>
+                A minimal knowledge base for saving technical notes, useful
+                snippets, and lessons learned while building.
+              </p>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">CSS</span>
+                <span class="tag">API</span>
+              </div>
+              <div class="project-links">
+                <a class="button button--black" href="#" aria-label="View Dev Notes code">
+                  View Code
+                </a>
+                <a class="button" href="#" aria-label="View Dev Notes live demo">
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <span>Data project</span>
+              <span class="project-number">003</span>
+            </div>
+            <div class="project-content">
+              <h3>Campus<br />Connect</h3>
+              <p>
+                A community-first platform concept connecting students with
+                events, clubs, resources, and campus opportunities.
+              </p>
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">UI / UX</span>
+                <span class="tag">SQL</span>
+              </div>
+              <div class="project-links">
+                <a class="button button--black" href="#" aria-label="View Campus Connect code">
+                  View Code
+                </a>
+                <a class="button" href="#" aria-label="View Campus Connect live demo">
+                  Live Demo
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--grey" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-layout">
+        <div>
+          <p class="section-label">03 // Open channel</p>
+          <h2 class="contact-heading" id="contact-title">
+            Have a
+            <span>Project?</span>
+          </h2>
+
+          <p class="contact-copy">
+            Got an idea, opportunity, or difficult problem? Send a message.
+            Good conversations usually start with a simple hello.
+          </p>
+
+          <div class="social-links" aria-label="Social links">
+            <a class="social-link" href="https://github.com/" target="_blank" rel="noopener">
+              <span>GitHub</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="social-link" href="https://www.linkedin.com/" target="_blank" rel="noopener">
+              <span>LinkedIn</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+            <a class="social-link" href="mailto:hello@vibhoryadav.dev">
+              <span>Email</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" action="mailto:hello@vibhoryadav.dev" method="post" enctype="text/plain">
+          <div class="form-field">
+            <label for="name">Your name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="ENTER YOUR NAME"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="email">Your email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="YOU@EMAIL.COM"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label for="message">Your message</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="TELL ME WHAT YOU ARE BUILDING..."
+              required
+            ></textarea>
+          </div>
+
+          <button class="button" type="submit">Send Message →</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-brand">VIBHOR YADAV // DEV</p>
+      <p class="footer-meta">Designed + built with intent // © 2025</p>
+    </div>
+  </footer>
+</body>
+</html>
+```
